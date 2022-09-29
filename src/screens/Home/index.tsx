@@ -1,12 +1,13 @@
 import React from "react";
 import { StatusBar } from "react-native";
 import { Container, Header, TotalCars, HeaderContent, CarList } from "./styles";
-
+import { useNavigation } from "@react-navigation/native";
 import Logo from "../../assets/logo.svg";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Car } from "../../components/Car";
 
 export function Home() {
+  const navigation = useNavigation();
   const carDataOne = {
     brand: "Audi",
     name: "RS 5 coupé",
@@ -29,6 +30,10 @@ export function Home() {
       "https://www.imagensempng.com.br/wp-content/uploads/2020/12/0010.png",
   };
 
+  function handleNavigateToCarDetails() {
+    navigation.navigate("CarDetails" as never);
+  }
+
   return (
     <Container>
       <StatusBar
@@ -45,7 +50,9 @@ export function Home() {
 
       <CarList
         data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-        renderItem={({ item }) => <Car data={carDataOne} />}
+        renderItem={({ item }) => (
+          <Car data={carDataTwo} onPress={handleNavigateToCarDetails} />
+        )}
         keyExtractor={(item) => String(item)}
       />
     </Container>
